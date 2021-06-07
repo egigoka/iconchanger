@@ -1,0 +1,5 @@
+"[multiple,lines,to match,in ""window"" label]",path,icon index
+"[Управление производственным предприятием]","\\KGN-MK-W0013\iconchanger\icons\уппппп.ico",0
+"[Зарплата и управление персоналом]","\\KGN-MK-W0013\iconchanger\icons\зупппп2.ico",0
+"[1С:Предприятие - Печать этикеток]","\\KGN-MK-W0013\iconchanger\icons\lp.ico",0
+"[1С:Предприятие - Столовая]","\\KGN-MK-W0013\iconchanger\icons\stol.ico",0

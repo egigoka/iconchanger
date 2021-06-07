@@ -95,6 +95,12 @@ namespace changeicon
         [DllImport("shell32.dll")]
         public static extern IntPtr ExtractIcon(IntPtr hInst, string file, int index);
 
+        [DllImport("user32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        [DllImport("kernel32.dll")]
+        static extern IntPtr GetConsoleWindow();
+
         static List<Process> GetProcessesWithMainWindowTItle()
         {
             Process[] processlist = Process.GetProcesses();
@@ -201,7 +207,10 @@ namespace changeicon
             foreach (IntPtr ptr in hDummy)
                 if (ptr != IntPtr.Zero)
                     DestroyIcon(ptr);
-            DestroyIcon(extracted_icon);
+            if (extracted_icon != IntPtr.Zero)
+            {
+                DestroyIcon(extracted_icon);
+            }
         }
 
         static ConfigLine[] ReadConfig(string configPath)
@@ -265,9 +274,23 @@ namespace changeicon
             return true;
         }
 
+        public static void HideConsole()
+        {
+            const int SW_HIDE = 0;
+            const int SW_SHOW = 5;
+
+            var handle = GetConsoleWindow();
+            ShowWindow(handle, SW_HIDE);
+        }
+
         static void Main(string[] args)
         {
-            WriteLine("iconchanger v0.2.13a");
+            WriteLine("iconchanger v0.3.4a");
+
+            if (!args.Contains("-w") && !args.Contains("-window"))
+            {
+                HideConsole();
+            }
 
             if (args.Contains("-o") || args.Contains("-once"))
             {
